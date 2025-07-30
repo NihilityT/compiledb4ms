@@ -18,7 +18,9 @@ int main()
 			R"("D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64\CL.exe" )"
 			R"(/c /Zi /nologo /W4 /WX /diagnostics:column /Od /Ob0 )"
 			+ proj.preprocessor_definitions() + " "
-			R"(/EHsc /RTC1 /MDd /GS /fp:precise /std:c++17 /Fo"acceptance_test.dir\Debug\\" )"
+			R"(/EHsc /RTC1 /MDd /GS /fp:precise )"
+			+ proj.std() + " "
+			R"(/Fo"acceptance_test.dir\Debug\\" )"
 			R"(/Fd"acceptance_test.dir\Debug\vc143.pdb" /external:W0 /Gd /TP /errorReport:queue )"
 			" " + proj.additional_options() + " "
 			"\"" + cl_compile_file.string() + '"',

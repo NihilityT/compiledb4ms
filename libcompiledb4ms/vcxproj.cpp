@@ -77,6 +77,15 @@ std::vector<std::filesystem::path> Vcxproj::cl_compile_files()
 	return cl_compile_node;
 }
 
+std::string Vcxproj::std()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string language_standard = item_definition_group.child("ClCompile")
+		.child("LanguageStandard").first_child().value();
+	utils::replace(language_standard, "stdcpp", "/std:c++");
+	return language_standard;
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

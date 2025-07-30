@@ -34,3 +34,13 @@ TEST(Vcxproj, extract_additional_options_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.additional_options(), expected);
 }
+
+TEST(Vcxproj, extract_std_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/std:c++17)"
+	};
+	ASSERT_EQ(proj.std(), expected);
+}

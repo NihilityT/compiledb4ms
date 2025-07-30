@@ -21,6 +21,8 @@ public:
 
 	std::vector<std::filesystem::path> cl_compile_files();
 
+	std::string std();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 
