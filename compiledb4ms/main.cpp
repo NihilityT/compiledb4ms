@@ -1,7 +1,9 @@
-﻿#include <compiledb4ms/command_object.h>
+﻿#include <libcompiledb4ms/command_object.h>
 
 #include <fstream>
 #include <string>
+
+using namespace compiledb4ms;
 
 int main()
 {

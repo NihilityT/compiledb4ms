@@ -1,7 +1,12 @@
-﻿#include <filesystem>
+﻿#ifndef __libcompiledb4ms_command_object_h__
+#define __libcompiledb4ms_command_object_h__
+
+#include <filesystem>
 #include <string>
 #include <variant>
 #include <vector>
+
+namespace compiledb4ms {
 
 struct Command_object {
 	// The working directory of the compilation.
@@ -32,3 +37,7 @@ struct Command_object {
 
         std::string str();
 };
+
+}
+
+#endif // __libcompiledb4ms_command_object_h__

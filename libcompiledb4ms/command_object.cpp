@@ -1,4 +1,4 @@
-﻿#include <compiledb4ms/command_object.h>
+﻿#include <libcompiledb4ms/command_object.h>
 #include <iomanip>
 #include <sstream>
 #include <variant>
@@ -30,6 +30,8 @@ overloaded(Ts...) -> overloaded<Ts...>;
 
 }
 
+namespace compiledb4ms {
+
 std::string Command_object::str()
 {
 	std::ostringstream os;
@@ -50,4 +52,6 @@ std::string Command_object::str()
 
 	os << '}';
 	return os.str();
+}
+
 }

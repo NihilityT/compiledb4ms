@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 
-#include <compiledb4ms/command_object.h>
+#include <libcompiledb4ms/command_object.h>
+
+using namespace compiledb4ms;
 
 TEST(Command_object_tojson, each_item_will_be_quoted)
 {

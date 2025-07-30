@@ -13,5 +13,8 @@ add_compile_options(
 enable_testing()
 
 add_subdirectory(libutils)
+
+add_subdirectory(libcompiledb4ms)
 add_subdirectory(compiledb4ms)
+
 add_subdirectory(tests)
