@@ -17,6 +17,8 @@ public:
 
 	std::string preprocessor_definitions();
 
+	std::string additional_options();
+
 	std::vector<std::filesystem::path> cl_compile_files();
 
 private:

@@ -20,7 +20,7 @@ int main()
 			+ proj.preprocessor_definitions() + " "
 			R"(/EHsc /RTC1 /MDd /GS /fp:precise /std:c++17 /Fo"acceptance_test.dir\Debug\\" )"
 			R"(/Fd"acceptance_test.dir\Debug\vc143.pdb" /external:W0 /Gd /TP /errorReport:queue )"
-			R"( /external:I "D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/include" )"
+			" " + proj.additional_options() + " "
 			"\"" + cl_compile_file.string() + '"',
 		};
 

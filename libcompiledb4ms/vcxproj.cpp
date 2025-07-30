@@ -55,6 +55,15 @@ std::string Vcxproj::preprocessor_definitions()
 	return definitions.str();
 }
 
+std::string Vcxproj::additional_options()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string additional_options = item_definition_group.child("ClCompile")
+		.child("AdditionalOptions").first_child().value();
+	utils::replace(additional_options, "%(AdditionalOptions) ", "");
+	return additional_options;
+}
+
 std::vector<std::filesystem::path> Vcxproj::cl_compile_files()
 {
 	std::vector<std::filesystem::path> cl_compile_node;

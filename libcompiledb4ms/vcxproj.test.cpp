@@ -24,3 +24,13 @@ TEST(Vcxproj, extract_preprocessor_definitions_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.preprocessor_definitions(), expected);
 }
+
+TEST(Vcxproj, extract_additional_options_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/external:I "D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/include")"
+	};
+	ASSERT_EQ(proj.additional_options(), expected);
+}

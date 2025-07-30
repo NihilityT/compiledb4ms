@@ -17,3 +17,10 @@ TEST(Utils, split)
 	};
 	ASSERT_EQ(splited, expected);
 }
+
+TEST(Utils, replace)
+{
+	std::string s = "1,2,3,2,3";
+	replace(s, ",2,", "2");
+	ASSERT_EQ(s, "123,2,3");
+}

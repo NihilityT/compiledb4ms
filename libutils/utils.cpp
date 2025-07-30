@@ -40,4 +40,12 @@ std::vector<std::string> split(const std::string& str, char delimiter)
 	return tokens;
 }
 
+void replace(std::string& str, std::string_view substr, std::string_view replacement)
+{
+	auto pos = str.find(substr);
+	if (pos != str.npos) {
+		str.replace(pos, substr.size(), replacement);
+	}
+}
+
 }
