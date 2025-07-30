@@ -9,5 +9,6 @@ target_link_libraries(acceptance_test
   PRIVATE libutils
 )
 gtest_discover_tests(acceptance_test
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
   PROPERTIES ENVIRONMENT compiledb4ms=$<TARGET_FILE:compiledb4ms>
 )
