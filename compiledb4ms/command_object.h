@@ -1,5 +1,6 @@
 ﻿#include <filesystem>
 #include <string>
+#include <variant>
 #include <vector>
 
 struct Command_object {
@@ -12,16 +13,14 @@ struct Command_object {
 	// There can be multiple command objects for the same file, for example if the same source file is compiled with different configurations.
 	std::filesystem::path file;
 
-	// The compile command argv as list of strings.
+	// arguments: The compile command argv as list of strings.
 	// This should run the compilation step for the translation unit file.
 	// arguments[0] should be the executable name, such as clang++.
 	// Arguments should not be escaped, but ready to pass to execvp().
-	std::vector<std::string> arguments;
-
-	// The compile command as a single shell-escaped string.
+	// command: The compile command as a single shell-escaped string.
 	// Arguments may be shell quoted and escaped following platform conventions, with ‘"’ and ‘\’ being the only special characters.
 	// Shell expansion is not supported.
-	// std::string command;
+	std::variant<std::vector<std::string>, std::string> arguments;
 
 	// Either arguments or command is required.
 	// arguments is preferred, as shell (un)escaping is a possible source of errors.

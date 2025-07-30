@@ -1,6 +1,7 @@
 ﻿#include <compiledb4ms/command_object.h>
 #include <iomanip>
 #include <sstream>
+#include <variant>
 
 namespace
 {
@@ -22,6 +23,11 @@ void output_arguments(std::ostringstream& os,
 	os << newline;
 }
 
+template<class... Ts>
+struct overloaded : Ts... { using Ts::operator()...; };
+template<class... Ts>
+overloaded(Ts...) -> overloaded<Ts...>;
+
 }
 
 std::string Command_object::str()
@@ -30,9 +36,18 @@ std::string Command_object::str()
 	os << '{' << newline;
 	os << R"(  "directory": )" << directory << ',' << newline;
 	os << R"(  "file": )" << file << ',' << newline;
-	os << R"(  "arguments": )" << '[' << newline;
-	output_arguments(os, arguments);
-	os << R"(  ])" << newline;
+
+	std::visit(overloaded{
+		[&](const std::vector<std::string>& arguments) {
+			os << R"(  "arguments": )" << '[' << newline;
+			output_arguments(os, arguments);
+			os << R"(  ])" << newline;
+		},
+		[&](const std::string& command) {
+			os << R"(  "command": )" << std::quoted(command) << newline;
+		},
+	}, arguments);
+
 	os << '}';
 	return os.str();
 }
