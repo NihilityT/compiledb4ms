@@ -14,10 +14,16 @@ enable_testing()
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
 
+add_executable(compiledb4ms
+  compiledb4ms/main.cpp
+)
+
 add_executable(acceptance_test
   tests/usage.cpp
 )
 target_link_libraries(acceptance_test
   PRIVATE GTest::gtest_main
 )
-gtest_discover_tests(acceptance_test)
+gtest_discover_tests(acceptance_test
+  PROPERTIES ENVIRONMENT compiledb4ms=$<TARGET_FILE:compiledb4ms>
+)
