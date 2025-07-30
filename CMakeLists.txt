@@ -15,8 +15,26 @@ find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
 
 add_executable(compiledb4ms
+  compiledb4ms/command_object.h
+  compiledb4ms/command_object.cpp
   compiledb4ms/main.cpp
 )
+target_include_directories(compiledb4ms
+  PRIVATE ${CMAKE_SOURCE_DIR}
+)
+
+add_executable(compiledb4ms_test
+  compiledb4ms/command_object.h
+  compiledb4ms/command_object.cpp
+  compiledb4ms/command_object.test.cpp
+)
+target_include_directories(compiledb4ms_test
+  PRIVATE ${CMAKE_SOURCE_DIR}
+)
+target_link_libraries(compiledb4ms_test
+  GTest::gtest_main
+)
+gtest_discover_tests(compiledb4ms_test)
 
 add_executable(acceptance_test
   tests/usage.cpp
