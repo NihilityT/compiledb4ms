@@ -14,6 +14,28 @@ enable_testing()
 find_package(GTest CONFIG REQUIRED)
 include(GoogleTest)
 
+add_library(libutils STATIC
+  libutils/utils.h
+  libutils/utils.cpp
+)
+target_include_directories(libutils
+  PUBLIC ${CMAKE_SOURCE_DIR}
+)
+
+include(GoogleTest)
+
+add_executable(libutils_test
+  libutils/utils.test.cpp
+)
+target_link_libraries(libutils_test
+  PRIVATE GTest::gtest_main
+  PRIVATE libutils
+)
+gtest_discover_tests(libutils_test
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
+
 add_executable(compiledb4ms
   compiledb4ms/command_object.h
   compiledb4ms/command_object.cpp
@@ -41,6 +63,7 @@ add_executable(acceptance_test
 )
 target_link_libraries(acceptance_test
   PRIVATE GTest::gtest_main
+  PRIVATE libutils
 )
 gtest_discover_tests(acceptance_test
   PROPERTIES ENVIRONMENT compiledb4ms=$<TARGET_FILE:compiledb4ms>

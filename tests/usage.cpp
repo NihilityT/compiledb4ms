@@ -2,43 +2,17 @@
 
 #include <stdlib.h>
 
-#include <filesystem>
-#include <fstream>
-#include <sstream>
 #include <string>
 
-namespace fs = std::filesystem;
-
-std::string read_file(const fs::path& path)
-{
-	std::ifstream in{ path };
-	std::ostringstream os;
-	os << in.rdbuf();
-	return os.str();
-}
-
-std::string get_env(const char* name, const char* default_value)
-{
-	size_t required_size = 0;
-	if (getenv_s(&required_size, nullptr, 0, name)) {
-		return default_value;
-	}
-
-	std::string env;
-	env.resize(required_size - 1);
-
-	getenv_s(&required_size, env.data(), required_size, name);
-	return env;
-
-}
+#include <libutils/utils.h>
 
 TEST(Usage, generate_compiledb_for_vcxproj)
 {
-	std::string compiledb4ms = get_env("compiledb4ms", "compiledb4ms");
+	std::string compiledb4ms = utils::get_env("compiledb4ms", "compiledb4ms");
 	int exit_code = system(compiledb4ms.c_str());
 	ASSERT_EQ(0, exit_code);
 
-	auto res = read_file("compile_commands.json");
+	auto res = utils::read_file("compile_commands.json");
 	std::string expected = R"([
 {
   "directory": "D:/!dev/WIP/tools/toolchain/compiledb4ms/build",
