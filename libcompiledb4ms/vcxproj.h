@@ -4,6 +4,7 @@
 #include <pugixml.hpp>
 
 #include <filesystem>
+#include <string>
 #include <vector>
 
 namespace compiledb4ms {
@@ -14,7 +15,12 @@ class Vcxproj
 public:
 	Vcxproj(const std::filesystem::path& path);
 
+	std::string preprocessor_definitions();
+
 	std::vector<std::filesystem::path> cl_compile_files();
+
+private:
+	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 
 private:
 	pugi::xml_document m_doc;

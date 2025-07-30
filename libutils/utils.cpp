@@ -26,7 +26,18 @@ std::string get_env(const char* name, std::string_view default_value)
 
 	getenv_s(&required_size, env.data(), required_size, name);
 	return env;
+}
 
+std::vector<std::string> split(const std::string& str, char delimiter)
+{
+	std::vector<std::string> tokens;
+	std::istringstream is(str);
+	std::string token;
+	while (std::getline(is, token, delimiter))
+	{
+		tokens.push_back(token);
+	}
+	return tokens;
 }
 
 }

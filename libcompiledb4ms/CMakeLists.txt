@@ -11,6 +11,7 @@ target_include_directories(libcompiledb4ms
 )
 target_link_libraries(libcompiledb4ms
   PUBLIC pugixml::pugixml
+  PRIVATE libutils
 )
 
 

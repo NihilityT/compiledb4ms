@@ -14,3 +14,13 @@ TEST(Vcxproj, extract_cl_compile_file_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.cl_compile_files(), expected);
 }
+
+TEST(Vcxproj, extract_preprocessor_definitions_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/D _MBCS /D WIN32 /D _WINDOWS /D GTEST_LINKED_AS_SHARED_LIBRARY=1 /D "CMAKE_INTDIR=\"Debug\"")"
+	};
+	ASSERT_EQ(proj.preprocessor_definitions(), expected);
+}
