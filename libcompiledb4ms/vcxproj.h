@@ -43,6 +43,8 @@ public:
 
 	std::string treat_warnings_as_errors();
 
+	std::string warning_level();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

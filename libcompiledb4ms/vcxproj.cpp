@@ -223,6 +223,28 @@ std::string Vcxproj::treat_warnings_as_errors()
 	return "/WX-";
 }
 
+std::string Vcxproj::warning_level()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string wl = item_definition_group.child("ClCompile")
+		.child("WarningLevel").first_child().value();
+
+	if (wl == "TurnOffAllWarnings") {
+		return "/W0";
+	} else if (wl == "Level1") {
+		return "/W1";
+	} else if (wl == "Level2") {
+		return "/W2";
+	} else if (wl == "Level3") {
+		return "/W3";
+	} else if (wl == "Level4") {
+		return "/W4";
+	} else if (wl == "EnableAllWarnings") {
+		return "/Wall";
+	}
+	return "/W1";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
