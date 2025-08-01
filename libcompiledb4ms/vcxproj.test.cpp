@@ -183,3 +183,13 @@ TEST(Vcxproj, extract_internal_compiler_error_reporting_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.internal_compiler_error_reporting(), expected);
 }
+
+TEST(Vcxproj, extract_compile_as_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/TP)"
+	};
+	ASSERT_EQ(proj.compile_as(), expected);
+}

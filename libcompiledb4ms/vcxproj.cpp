@@ -297,6 +297,28 @@ std::string Vcxproj::internal_compiler_error_reporting()
 	return "/errorReport:queue";
 }
 
+std::string Vcxproj::compile_as()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string ca = item_definition_group.child("ClCompile")
+		.child("CompileAs").first_child().value();
+
+	if (ca == "Default") {
+		return "/TP"; // /TC for c, /TP for cpp
+	} else if (ca == "CompileAsC") {
+		return "/TC";
+	} else if (ca == "CompileAsCpp") {
+		return "/TP";
+	} else if (ca == "CompileAsCppModule") {
+		return "/interface";
+	} else if (ca == "CompileAsCppModuleInternalPartition") {
+		return "/internalPartition";
+	} else if (ca == "CompileAsHeaderUnit") {
+		return "/exportHeader";
+	}
+	return "/TP";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
