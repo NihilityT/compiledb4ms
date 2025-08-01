@@ -174,6 +174,23 @@ std::string Vcxproj::inline_function_expansion()
 	return "";
 }
 
+std::string Vcxproj::optimization()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string optimization = item_definition_group.child("ClCompile")
+		.child("Optimization").first_child().value();
+	if (optimization == "Disabled") {
+		return "/Od";
+	} else if (optimization == "MinSpace") {
+		return "/O1";
+	} else if (optimization == "MaxSpeed") {
+		return "/O2";
+	} else if (optimization == "Full") {
+		return "/Ox";
+	}
+	return "";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

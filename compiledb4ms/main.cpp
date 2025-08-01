@@ -16,7 +16,8 @@ int main()
 			"D:/!dev/WIP/tools/toolchain/compiledb4ms/build",
 			cl_compile_file,
 			R"("D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64\CL.exe" )"
-			R"(/c /Zi /nologo /W4 /WX /diagnostics:column /Od )"
+			R"(/c /Zi /nologo /W4 /WX /diagnostics:column )"
+			+ proj.optimization() + " "
 			+ proj.inline_function_expansion() + " "
 			+ proj.preprocessor_definitions() + " "
 			+ proj.exception_handling() + " "

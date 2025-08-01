@@ -104,3 +104,13 @@ TEST(Vcxproj, extract_inline_function_expansion_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.inline_function_expansion(), expected);
 }
+
+TEST(Vcxproj, extract_optimization_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/Od)"
+	};
+	ASSERT_EQ(proj.optimization(), expected);
+}

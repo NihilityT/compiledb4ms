@@ -35,6 +35,8 @@ public:
 
 	std::string inline_function_expansion();
 
+	std::string optimization();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 
