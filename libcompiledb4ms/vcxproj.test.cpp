@@ -213,3 +213,35 @@ TEST(Vcxproj, extract_external_header_warning_level_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.external_header_warning_level(), expected);
 }
+
+TEST(Vcxproj, extract_program_database_file_name_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/Fd"acceptance_test.dir\Debug\vc143.pdb")"
+	};
+	ASSERT_EQ(proj.program_database_file_name(), expected);
+}
+
+TEST(Vcxproj, get_property)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(acceptance_test.dir\Debug\)"
+	};
+	ASSERT_EQ(proj.get_property("IntDir"), expected);
+	ASSERT_EQ(proj.get_property("PlatformToolsetVersion"), "143");
+}
+
+TEST(Vcxproj, resolve_property)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(1acceptance_test.dir\Debug\2)"
+	};
+	ASSERT_EQ(proj.resolve_property("1$(IntDir)2"), expected);
+	ASSERT_EQ(proj.resolve_property("$(don't exists)"), "");
+}

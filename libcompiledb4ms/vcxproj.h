@@ -57,6 +57,11 @@ public:
 
 	std::string external_header_warning_level();
 
+	std::string program_database_file_name();
+
+	std::string get_property(const std::string& property);
+	std::string resolve_property(const std::string& expression);
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

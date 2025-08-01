@@ -2,6 +2,7 @@
 #include <libutils/utils.h>
 
 #include <algorithm>
+#include <regex>
 #include <sstream>
 
 namespace {
@@ -22,6 +23,17 @@ std::string warning_level(std::string_view warning)
 		return "Wall";
 	}
 	return "W1";
+}
+
+std::string get_arch_condition(const char* arch = "Debug|x64")
+{
+	return std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
+}
+
+bool is_match_arch_condition(const pugi::xml_node& node)
+{
+	pugi::xml_attribute condition = node.attribute("Condition");
+	return condition.empty() || condition.value() == get_arch_condition();
 }
 
 }
@@ -362,11 +374,59 @@ std::string Vcxproj::external_header_warning_level()
 	return "/external:" + ::warning_level(ewl);
 }
 
+std::string Vcxproj::program_database_file_name()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string pdbfn = item_definition_group.child("ClCompile")
+		.child("ProgramDataBaseFileName").first_child().value();
+
+	return "/Fd\"" + (pdbfn.empty()
+		? resolve_property("$(IntDir)vc$(PlatformToolsetVersion).pdb")
+		: resolve_property(pdbfn)) + '"';
+}
+
+std::string Vcxproj::get_property(const std::string& property)
+{
+	if (property == "PlatformToolsetVersion") {
+		return get_property("PlatformToolset").substr(1);
+	}
+
+	for (pugi::xml_node node : m_project.children("PropertyGroup")) {
+		if (!is_match_arch_condition(node)) {
+			continue;
+		}
+
+		if (pugi::xml_node property_node = node.child(property)) {
+			if (is_match_arch_condition(property_node)) {
+				return property_node.first_child().value();
+			}
+		}
+	}
+	return {};
+}
+
+std::string Vcxproj::resolve_property(const std::string& expression)
+{
+	std::regex variable{ R"(\$\(([^)]+)\))" };
+	auto begin = expression.cbegin();
+	auto end = expression.cend();
+
+	std::string res;
+	std::smatch sm;
+	while (std::regex_search(begin, end, sm, variable)) {
+		std::string var = sm[1];
+		res.append(begin, sm[0].first);
+		res.append(get_property(sm[1].str()));
+		begin = sm[0].second;
+	}
+	res.append(begin, end);
+	return res;
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
-	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
 	return m_project.find_child_by_attribute(name,
-		"Condition", arch_condition.c_str());
+		"Condition", get_arch_condition(arch).c_str());
 }
 
 }

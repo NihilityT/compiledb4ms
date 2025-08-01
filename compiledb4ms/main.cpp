@@ -32,7 +32,7 @@ int main()
 			+ proj.floating_point_model() + " "
 			+ proj.std() + " "
 			R"(/Fo"acceptance_test.dir\Debug\\" )"
-			R"(/Fd"acceptance_test.dir\Debug\vc143.pdb" )"
+			+ proj.program_database_file_name() + " "
 			+ proj.external_header_warning_level() + " "
 			+ proj.calling_convension() + " "
 			+ proj.compile_as() + " "
