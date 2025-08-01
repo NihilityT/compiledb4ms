@@ -212,6 +212,17 @@ std::string Vcxproj::diagnostics_format()
 	return "/diagnostics:column";
 }
 
+std::string Vcxproj::treat_warnings_as_errors()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string wae = item_definition_group.child("ClCompile")
+		.child("TreatWarningAsError").first_child().value();
+	if (wae == "true") {
+		return "/WX";
+	}
+	return "/WX-";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

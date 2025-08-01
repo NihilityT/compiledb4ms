@@ -133,3 +133,13 @@ TEST(Vcxproj, extract_diagnostics_format_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.diagnostics_format(), expected);
 }
+
+TEST(Vcxproj, extract_treat_warnings_as_errors_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/WX-)"
+	};
+	ASSERT_EQ(proj.treat_warnings_as_errors(), expected);
+}
