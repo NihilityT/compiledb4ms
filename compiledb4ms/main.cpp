@@ -16,7 +16,8 @@ int main()
 			proj.directory(),
 			cl_compile_file,
 			R"("D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64\CL.exe" )"
-			R"(/c /Zi )"
+			R"(/c )"
+			+ proj.debug_information_format() + " "
 			+ proj.suppress_startup_banner() + " "
 			+ proj.warning_level() + " "
 			+ proj.treat_warnings_as_errors() + " "

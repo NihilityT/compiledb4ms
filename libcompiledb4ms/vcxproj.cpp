@@ -257,6 +257,24 @@ std::string Vcxproj::suppress_startup_banner()
 	return "/nologo";
 }
 
+std::string Vcxproj::debug_information_format()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string dif = item_definition_group.child("ClCompile")
+		.child("DebugInformationFormat").first_child().value();
+
+	if (dif == "None") {
+		return "";
+	} else if (dif == "OldStyle") {
+		return "/Z7";
+	} else if (dif == "ProgramDatabase") {
+		return "/Zi";
+	} else if (dif == "EditAndContinue") {
+		return "/ZI";
+	}
+	return "";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

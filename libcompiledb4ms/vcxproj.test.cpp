@@ -163,3 +163,13 @@ TEST(Vcxproj, extract_suppress_startup_banner_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.suppress_startup_banner(), expected);
 }
+
+TEST(Vcxproj, extract_debug_information_format_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/Zi)"
+	};
+	ASSERT_EQ(proj.debug_information_format(), expected);
+}
