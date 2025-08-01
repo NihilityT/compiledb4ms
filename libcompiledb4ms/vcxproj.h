@@ -53,6 +53,8 @@ public:
 
 	std::string compile_as();
 
+	std::string calling_convension();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

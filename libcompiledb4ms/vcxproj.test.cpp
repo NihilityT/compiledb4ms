@@ -193,3 +193,13 @@ TEST(Vcxproj, extract_compile_as_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.compile_as(), expected);
 }
+
+TEST(Vcxproj, extract_calling_convension_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/Gd)"
+	};
+	ASSERT_EQ(proj.calling_convension(), expected);
+}

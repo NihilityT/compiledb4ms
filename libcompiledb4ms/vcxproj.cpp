@@ -319,6 +319,24 @@ std::string Vcxproj::compile_as()
 	return "/TP";
 }
 
+std::string Vcxproj::calling_convension()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string cc = item_definition_group.child("ClCompile")
+		.child("CallingConvention").first_child().value();
+
+	if (cc == "Cdecl") {
+		return "/Gd";
+	} else if (cc == "FastCall") {
+		return "/Gr";
+	} else if (cc == "StdCall") {
+		return "/Gz";
+	} else if (cc == "VectorCall") {
+		return "/Gv";
+	}
+	return "/Gd";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
