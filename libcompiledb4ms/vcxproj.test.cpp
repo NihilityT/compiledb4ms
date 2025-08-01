@@ -267,3 +267,17 @@ TEST(Vcxproj, init_with_arch)
 		ASSERT_EQ(proj.get_property("IntDir"), R"(acceptance_test.dir\Release\)");
 	}
 }
+
+TEST(Vcxproj, get_compile_objects)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj", "Debug|x64" };
+
+	std::vector<Command_object> expected{
+		{
+			std::filesystem::current_path() / "libcompiledb4ms",
+			"D:\\!dev\\WIP\\tools\\toolchain\\compiledb4ms\\tests\\usage.cpp",
+			"\"D:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Tools\\MSVC\\14.43.34808\\bin\\Hostx64\\x64\\cl.exe\" /c /Zi /nologo /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D GTEST_LINKED_AS_SHARED_LIBRARY=1 /D \"CMAKE_INTDIR=\\\"Debug\\\"\" /EHsc /RTC1 /MDd /GS /fp:precise /std:c++17 /Fo\"acceptance_test.dir\\Debug\\\\\" /Fd\"acceptance_test.dir\\Debug\\vc143.pdb\" /external:W0 /Gd /TP /errorReport:queue  /external:I \"D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/include\" \"D:\\!dev\\WIP\\tools\\toolchain\\compiledb4ms\\tests\\usage.cpp\"",
+		}
+	};
+	ASSERT_EQ(proj.command_objects(), expected);
+}

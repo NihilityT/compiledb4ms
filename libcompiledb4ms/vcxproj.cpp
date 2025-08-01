@@ -1,9 +1,11 @@
 ﻿#include <libcompiledb4ms/vcxproj.h>
+#include <libcompiledb4ms/utils.h>
 #include <libutils/utils.h>
 
 #include <algorithm>
 #include <regex>
 #include <sstream>
+#include <vector>
 
 namespace {
 
@@ -50,15 +52,50 @@ Vcxproj::Vcxproj(const std::filesystem::path& path, std::string_view arch /*= "D
 	m_project = m_doc.child("Project");
 }
 
-std::filesystem::path Vcxproj::directory()
+std::vector<Command_object> Vcxproj::command_objects() const
+{
+	std::vector<Command_object> res;
+	for (auto& cl_compile_file : cl_compile_files()) {
+		res.emplace_back(Command_object{
+			 directory(),
+			 cl_compile_file,
+			 '"' + utils::get_cl_path().string() + "\" /c "
+			 + debug_information_format() + " "
+			 + suppress_startup_banner() + " "
+			 + warning_level() + " "
+			 + treat_warnings_as_errors() + " "
+			 + diagnostics_format() + " "
+			 + optimization() + " "
+			 + inline_function_expansion() + " "
+			 + preprocessor_definitions() + " "
+			 + exception_handling() + " "
+			 + basic_runtime_checks() + " "
+			 + runtime_library() + " "
+			 + security_check() + " "
+			 + floating_point_model() + " "
+			 + std() + " "
+			 + object_file_name() + " "
+			 + program_database_file_name() + " "
+			 + external_header_warning_level() + " "
+			 + calling_convension() + " "
+			 + compile_as() + " "
+			 + internal_compiler_error_reporting() + " "
+			 " " + additional_options() + " "
+			 "\"" + cl_compile_file.string() + '"',
+		});
+	}
+	return res;
+}
+
+std::filesystem::path Vcxproj::directory() const
 {
 	return std::filesystem::absolute(m_proj_path).parent_path();
 }
 
-std::string Vcxproj::preprocessor_definitions()
+std::string Vcxproj::preprocessor_definitions() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
-	auto preprocessor_definitions = utils::split(
+	auto preprocessor_definitions = ::utils::split(
 		item_definition_group.child("ClCompile")
 		.child("PreprocessorDefinitions")
 		.first_child().value());
@@ -98,16 +135,16 @@ std::string Vcxproj::preprocessor_definitions()
 	return definitions.str();
 }
 
-std::string Vcxproj::additional_options()
+std::string Vcxproj::additional_options() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string additional_options = item_definition_group.child("ClCompile")
 		.child("AdditionalOptions").first_child().value();
-	utils::replace(additional_options, "%(AdditionalOptions) ", "");
+	::utils::replace(additional_options, "%(AdditionalOptions) ", "");
 	return additional_options;
 }
 
-std::vector<std::filesystem::path> Vcxproj::cl_compile_files()
+std::vector<std::filesystem::path> Vcxproj::cl_compile_files() const
 {
 	std::vector<std::filesystem::path> cl_compile_node;
 	for (pugi::xml_node item_group : m_project.children("ItemGroup"))
@@ -120,16 +157,16 @@ std::vector<std::filesystem::path> Vcxproj::cl_compile_files()
 	return cl_compile_node;
 }
 
-std::string Vcxproj::std()
+std::string Vcxproj::std() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string language_standard = item_definition_group.child("ClCompile")
 		.child("LanguageStandard").first_child().value();
-	utils::replace(language_standard, "stdcpp", "/std:c++");
+	::utils::replace(language_standard, "stdcpp", "/std:c++");
 	return language_standard;
 }
 
-std::string Vcxproj::runtime_library()
+std::string Vcxproj::runtime_library() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string library = item_definition_group.child("ClCompile")
@@ -146,7 +183,7 @@ std::string Vcxproj::runtime_library()
 	return "";
 }
 
-std::string Vcxproj::floating_point_model()
+std::string Vcxproj::floating_point_model() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string model = item_definition_group.child("ClCompile")
@@ -161,7 +198,7 @@ std::string Vcxproj::floating_point_model()
 	return "/fp:precise";
 }
 
-std::string Vcxproj::exception_handling()
+std::string Vcxproj::exception_handling() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string eh = item_definition_group.child("ClCompile")
@@ -176,7 +213,7 @@ std::string Vcxproj::exception_handling()
 	return "";
 }
 
-std::string Vcxproj::security_check()
+std::string Vcxproj::security_check() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string bsc = item_definition_group.child("ClCompile")
@@ -187,7 +224,7 @@ std::string Vcxproj::security_check()
 	return "/GS";
 }
 
-std::string Vcxproj::basic_runtime_checks()
+std::string Vcxproj::basic_runtime_checks() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string brc = item_definition_group.child("ClCompile")
@@ -202,7 +239,7 @@ std::string Vcxproj::basic_runtime_checks()
 	return "";
 }
 
-std::string Vcxproj::inline_function_expansion()
+std::string Vcxproj::inline_function_expansion() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string ife = item_definition_group.child("ClCompile")
@@ -217,7 +254,7 @@ std::string Vcxproj::inline_function_expansion()
 	return "";
 }
 
-std::string Vcxproj::optimization()
+std::string Vcxproj::optimization() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string optimization = item_definition_group.child("ClCompile")
@@ -234,7 +271,7 @@ std::string Vcxproj::optimization()
 	return "";
 }
 
-std::string Vcxproj::diagnostics_format()
+std::string Vcxproj::diagnostics_format() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string df = item_definition_group.child("ClCompile")
@@ -249,7 +286,7 @@ std::string Vcxproj::diagnostics_format()
 	return "/diagnostics:column";
 }
 
-std::string Vcxproj::treat_warnings_as_errors()
+std::string Vcxproj::treat_warnings_as_errors() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string wae = item_definition_group.child("ClCompile")
@@ -260,7 +297,7 @@ std::string Vcxproj::treat_warnings_as_errors()
 	return "/WX-";
 }
 
-std::string Vcxproj::warning_level()
+std::string Vcxproj::warning_level() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string wl = item_definition_group.child("ClCompile")
@@ -269,7 +306,7 @@ std::string Vcxproj::warning_level()
 	return "/" + ::warning_level(wl);
 }
 
-std::string Vcxproj::suppress_startup_banner()
+std::string Vcxproj::suppress_startup_banner() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string ssb = item_definition_group.child("ClCompile")
@@ -281,7 +318,7 @@ std::string Vcxproj::suppress_startup_banner()
 	return "/nologo";
 }
 
-std::string Vcxproj::debug_information_format()
+std::string Vcxproj::debug_information_format() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string dif = item_definition_group.child("ClCompile")
@@ -299,7 +336,7 @@ std::string Vcxproj::debug_information_format()
 	return "";
 }
 
-std::string Vcxproj::internal_compiler_error_reporting()
+std::string Vcxproj::internal_compiler_error_reporting() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string er = item_definition_group.child("ClCompile")
@@ -321,7 +358,7 @@ std::string Vcxproj::internal_compiler_error_reporting()
 	return "/errorReport:queue";
 }
 
-std::string Vcxproj::compile_as()
+std::string Vcxproj::compile_as() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string ca = item_definition_group.child("ClCompile")
@@ -343,7 +380,7 @@ std::string Vcxproj::compile_as()
 	return "/TP";
 }
 
-std::string Vcxproj::calling_convension()
+std::string Vcxproj::calling_convension() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string cc = item_definition_group.child("ClCompile")
@@ -361,7 +398,7 @@ std::string Vcxproj::calling_convension()
 	return "/Gd";
 }
 
-std::string Vcxproj::external_header_warning_level()
+std::string Vcxproj::external_header_warning_level() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string ewl = item_definition_group.child("ClCompile")
@@ -377,7 +414,7 @@ std::string Vcxproj::external_header_warning_level()
 	return "/external:" + ::warning_level(ewl);
 }
 
-std::string Vcxproj::program_database_file_name()
+std::string Vcxproj::program_database_file_name() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string pdbfn = item_definition_group.child("ClCompile")
@@ -388,7 +425,7 @@ std::string Vcxproj::program_database_file_name()
 		: resolve_property(pdbfn)) + '"';
 }
 
-std::string Vcxproj::object_file_name()
+std::string Vcxproj::object_file_name() const
 {
 	auto item_definition_group = get_arch("ItemDefinitionGroup");
 	std::string ofn = item_definition_group.child("ClCompile")
@@ -397,7 +434,7 @@ std::string Vcxproj::object_file_name()
 	return "/Fo\"" + resolve_property(ofn) + R"(\")";
 }
 
-std::string Vcxproj::get_property(const std::string& property)
+std::string Vcxproj::get_property(const std::string& property) const
 {
 	if (property == "PlatformToolsetVersion") {
 		return get_property("PlatformToolset").substr(1);
@@ -417,7 +454,7 @@ std::string Vcxproj::get_property(const std::string& property)
 	return {};
 }
 
-std::string Vcxproj::resolve_property(const std::string& expression)
+std::string Vcxproj::resolve_property(const std::string& expression) const
 {
 	std::regex variable{ R"(\$\(([^)]+)\))" };
 	auto begin = expression.cbegin();
@@ -435,7 +472,7 @@ std::string Vcxproj::resolve_property(const std::string& expression)
 	return res;
 }
 
-pugi::xml_node Vcxproj::get_arch(const char* name)
+pugi::xml_node Vcxproj::get_arch(const char* name) const
 {
 	return m_project.find_child_by_attribute(name,
 		"Condition", m_arch_condition.c_str());

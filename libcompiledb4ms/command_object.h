@@ -2,6 +2,7 @@
 #define __libcompiledb4ms_command_object_h__
 
 #include <filesystem>
+#include <ostream>
 #include <string>
 #include <variant>
 #include <vector>
@@ -35,7 +36,10 @@ struct Command_object {
 	// It can be used to distinguish different processing modes of the same input file.
 	std::filesystem::path output{};
 
-        std::string str();
+	std::string str() const;
+
+	friend bool operator==(const Command_object& lhs, const Command_object& rhs);
+	friend std::ostream& operator<<(std::ostream& os, const Command_object& obj);
 };
 
 }

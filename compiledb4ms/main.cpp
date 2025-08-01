@@ -12,36 +12,8 @@ int main()
 
 	std::ofstream out{ "compile_commands.json" };
 	out << "[\n";
-	for (auto& cl_compile_file : proj.cl_compile_files()) {
-		Command_object obj = {
-			proj.directory(),
-			cl_compile_file,
-			'"' + utils::get_cl_path().string() + "\" /c "
-			+ proj.debug_information_format() + " "
-			+ proj.suppress_startup_banner() + " "
-			+ proj.warning_level() + " "
-			+ proj.treat_warnings_as_errors() + " "
-			+ proj.diagnostics_format() + " "
-			+ proj.optimization() + " "
-			+ proj.inline_function_expansion() + " "
-			+ proj.preprocessor_definitions() + " "
-			+ proj.exception_handling() + " "
-			+ proj.basic_runtime_checks() + " "
-			+ proj.runtime_library() + " "
-			+ proj.security_check() + " "
-			+ proj.floating_point_model() + " "
-			+ proj.std() + " "
-			+ proj.object_file_name() + " "
-			+ proj.program_database_file_name() + " "
-			+ proj.external_header_warning_level() + " "
-			+ proj.calling_convension() + " "
-			+ proj.compile_as() + " "
-			+ proj.internal_compiler_error_reporting() + " "
-			" " + proj.additional_options() + " "
-			"\"" + cl_compile_file.string() + '"',
-		};
-
-		out << obj.str();
+	for (auto& obj : proj.command_objects()) {
+		out << obj;
 	}
 	out << "\n]";
 

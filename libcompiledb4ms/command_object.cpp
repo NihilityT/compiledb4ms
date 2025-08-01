@@ -32,7 +32,7 @@ overloaded(Ts...) -> overloaded<Ts...>;
 
 namespace compiledb4ms {
 
-std::string Command_object::str()
+std::string Command_object::str() const
 {
 	std::ostringstream os;
 	os << '{' << newline;
@@ -52,6 +52,20 @@ std::string Command_object::str()
 
 	os << '}';
 	return os.str();
+}
+
+bool operator==(const Command_object& lhs, const Command_object& rhs)
+{
+	return lhs.directory == rhs.directory
+		&& lhs.file == rhs.file
+		&& lhs.arguments == rhs.arguments
+		&& lhs.output == rhs.output
+		;
+}
+
+std::ostream& operator<<(std::ostream& os, const Command_object& obj)
+{
+	return os << obj.str();
 }
 
 }
