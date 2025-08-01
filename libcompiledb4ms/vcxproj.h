@@ -39,6 +39,8 @@ public:
 
 	std::string optimization();
 
+	std::string diagnostics_format();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

@@ -197,6 +197,21 @@ std::string Vcxproj::optimization()
 	return "";
 }
 
+std::string Vcxproj::diagnostics_format()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string df = item_definition_group.child("ClCompile")
+		.child("DiagnosticsFormat").first_child().value();
+	if (df == "Caret") {
+		return "/diagnostics:caret";
+	} else if (df == "Column") {
+		return "/diagnostics:column";
+	} else if (df == "Classic") {
+		return "/diagnostics:classic";
+	}
+	return "/diagnostics:column";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

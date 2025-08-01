@@ -123,3 +123,13 @@ TEST(Vcxproj, extract_optimization_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.optimization(), expected);
 }
+
+TEST(Vcxproj, extract_diagnostics_format_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/diagnostics:column)"
+	};
+	ASSERT_EQ(proj.diagnostics_format(), expected);
+}
