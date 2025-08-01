@@ -173,3 +173,13 @@ TEST(Vcxproj, extract_debug_information_format_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.debug_information_format(), expected);
 }
+
+TEST(Vcxproj, extract_internal_compiler_error_reporting_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/errorReport:queue)"
+	};
+	ASSERT_EQ(proj.internal_compiler_error_reporting(), expected);
+}

@@ -275,6 +275,28 @@ std::string Vcxproj::debug_information_format()
 	return "";
 }
 
+std::string Vcxproj::internal_compiler_error_reporting()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string er = item_definition_group.child("ClCompile")
+		.child("ErrorReporting").first_child().value();
+
+	if (er == "None") {
+		return "/errorReport:none";
+	} else if (er == "Prompt") {
+		return "/errorReport:prompt";
+	} else if (er == "Queue") {
+		return "/errorReport:queue";
+	} else if (er == "Send") {
+		return "/errorReport:send";
+	}
+	// Specifies how internal tool errors should be reported back to Microsoft.
+	// The default in the IDE is prompt.
+	// The default from command line builds is queue.
+	// (/errorReport:[method])
+	return "/errorReport:queue";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

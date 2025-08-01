@@ -49,6 +49,8 @@ public:
 
 	std::string debug_information_format();
 
+	std::string internal_compiler_error_reporting();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

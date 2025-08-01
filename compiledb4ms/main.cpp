@@ -32,7 +32,8 @@ int main()
 			+ proj.floating_point_model() + " "
 			+ proj.std() + " "
 			R"(/Fo"acceptance_test.dir\Debug\\" )"
-			R"(/Fd"acceptance_test.dir\Debug\vc143.pdb" /external:W0 /Gd /TP /errorReport:queue )"
+			R"(/Fd"acceptance_test.dir\Debug\vc143.pdb" /external:W0 /Gd /TP )"
+			+ proj.internal_compiler_error_reporting() + " "
 			" " + proj.additional_options() + " "
 			"\"" + cl_compile_file.string() + '"',
 		};
