@@ -1,4 +1,5 @@
 ﻿#include <libcompiledb4ms/command_object.h>
+#include <libcompiledb4ms/utils.h>
 #include <libcompiledb4ms/vcxproj.h>
 
 #include <fstream>
@@ -15,8 +16,7 @@ int main()
 		Command_object obj = {
 			proj.directory(),
 			cl_compile_file,
-			R"("D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64\CL.exe" )"
-			R"(/c )"
+			'"' + utils::get_cl_path().string() + "\" /c "
 			+ proj.debug_information_format() + " "
 			+ proj.suppress_startup_banner() + " "
 			+ proj.warning_level() + " "

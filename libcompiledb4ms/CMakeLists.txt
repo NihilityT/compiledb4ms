@@ -1,10 +1,12 @@
 ﻿find_package(pugixml CONFIG REQUIRED)
 
 add_library(libcompiledb4ms STATIC
-  command_object.h
   command_object.cpp
-  vcxproj.h
+  command_object.h
+  utils.cpp
+  utils.h
   vcxproj.cpp
+  vcxproj.h
 )
 target_include_directories(libcompiledb4ms
   PUBLIC ${CMAKE_SOURCE_DIR}
@@ -20,6 +22,7 @@ include(GoogleTest)
 
 add_executable(libcompiledb4ms_test
   command_object.test.cpp
+  utils.test.cpp
   vcxproj.test.cpp
 )
 target_link_libraries(libcompiledb4ms_test
