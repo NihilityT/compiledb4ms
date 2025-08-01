@@ -118,6 +118,21 @@ std::string Vcxproj::floating_point_model()
 	return "/fp:precise";
 }
 
+std::string Vcxproj::exception_handling()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string eh = item_definition_group.child("ClCompile")
+		.child("ExceptionHandling").first_child().value();
+	if (eh == "Sync") {
+		return "/EHsc";
+	} else if (eh == "Async") {
+		return "/EHa";
+	} else if (eh == "SyncCThrow") {
+		return "/EHs";
+	}
+	return "";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

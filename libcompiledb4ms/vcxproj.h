@@ -27,6 +27,8 @@ public:
 
 	std::string floating_point_model();
 
+	std::string exception_handling();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 
