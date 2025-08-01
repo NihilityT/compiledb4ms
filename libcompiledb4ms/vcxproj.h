@@ -45,6 +45,8 @@ public:
 
 	std::string warning_level();
 
+	std::string suppress_startup_banner();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

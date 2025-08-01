@@ -153,3 +153,13 @@ TEST(Vcxproj, extract_warning_level_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.warning_level(), expected);
 }
+
+TEST(Vcxproj, extract_suppress_startup_banner_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/nologo)"
+	};
+	ASSERT_EQ(proj.suppress_startup_banner(), expected);
+}

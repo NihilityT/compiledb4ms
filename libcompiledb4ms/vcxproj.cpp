@@ -245,6 +245,18 @@ std::string Vcxproj::warning_level()
 	return "/W1";
 }
 
+std::string Vcxproj::suppress_startup_banner()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string ssb = item_definition_group.child("ClCompile")
+		.child("SuppressStartupBanner").first_child().value();
+
+	if (ssb == "false") {
+		return "";
+	}
+	return "/nologo";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
