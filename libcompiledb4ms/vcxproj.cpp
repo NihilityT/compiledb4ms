@@ -25,23 +25,26 @@ std::string warning_level(std::string_view warning)
 	return "W1";
 }
 
-std::string get_arch_condition(const char* arch = "Debug|x64")
+std::string get_arch_condition(std::string_view arch = "Debug|x64")
 {
-	return std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
+	std::ostringstream os;
+	os << "'$(Configuration)|$(Platform)'=='" << arch << "'";
+	return os.str();
 }
 
-bool is_match_arch_condition(const pugi::xml_node& node)
+bool is_match_arch_condition(const pugi::xml_node& node, std::string_view arch_condition)
 {
 	pugi::xml_attribute condition = node.attribute("Condition");
-	return condition.empty() || condition.value() == get_arch_condition();
+	return condition.empty() || condition.value() == arch_condition;
 }
 
 }
 
 namespace compiledb4ms {
 
-Vcxproj::Vcxproj(const std::filesystem::path& path)
+Vcxproj::Vcxproj(const std::filesystem::path& path, std::string_view arch /*= "Debug|x64"*/)
 	: m_proj_path(path)
+	, m_arch_condition(get_arch_condition(arch))
 {
 	m_doc.load_file(path.c_str());
 	m_project = m_doc.child("Project");
@@ -400,13 +403,13 @@ std::string Vcxproj::get_property(const std::string& property)
 		return get_property("PlatformToolset").substr(1);
 	}
 
-	for (pugi::xml_node node : m_project.children("PropertyGroup")) {
-		if (!is_match_arch_condition(node)) {
+	for (pugi::xml_node group : m_project.children("PropertyGroup")) {
+		if (!is_match_arch_condition(group, m_arch_condition)) {
 			continue;
 		}
 
-		if (pugi::xml_node property_node = node.child(property)) {
-			if (is_match_arch_condition(property_node)) {
+		for (pugi::xml_node property_node : group.children(property.c_str())) {
+			if (is_match_arch_condition(property_node, m_arch_condition)) {
 				return property_node.first_child().value();
 			}
 		}
@@ -432,10 +435,10 @@ std::string Vcxproj::resolve_property(const std::string& expression)
 	return res;
 }
 
-pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
+pugi::xml_node Vcxproj::get_arch(const char* name)
 {
 	return m_project.find_child_by_attribute(name,
-		"Condition", get_arch_condition(arch).c_str());
+		"Condition", m_arch_condition.c_str());
 }
 
 }

@@ -255,3 +255,15 @@ TEST(Vcxproj, resolve_property)
 	ASSERT_EQ(proj.resolve_property("1$(IntDir)2"), expected);
 	ASSERT_EQ(proj.resolve_property("$(don't exists)"), "");
 }
+
+TEST(Vcxproj, init_with_arch)
+{
+	{
+		Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj", "Debug|x64" };
+		ASSERT_EQ(proj.get_property("IntDir"), R"(acceptance_test.dir\Debug\)");
+	}
+	{
+		Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj", "Release|x64" };
+		ASSERT_EQ(proj.get_property("IntDir"), R"(acceptance_test.dir\Release\)");
+	}
+}

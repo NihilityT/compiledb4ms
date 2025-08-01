@@ -13,7 +13,7 @@ class Vcxproj
 {
 
 public:
-	Vcxproj(const std::filesystem::path& path);
+	Vcxproj(const std::filesystem::path& path, std::string_view arch = "Debug|x64");
 
 	std::filesystem::path directory();
 
@@ -65,12 +65,13 @@ public:
 	std::string resolve_property(const std::string& expression);
 
 private:
-	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
+	pugi::xml_node get_arch(const char* name);
 
 private:
 	std::filesystem::path m_proj_path;
 	pugi::xml_document m_doc;
 	pugi::xml_node m_project;
+	std::string m_arch_condition;
 };
 
 }
