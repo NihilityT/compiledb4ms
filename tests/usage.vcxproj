@@ -60,25 +60,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">acceptance_test.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">acceptance_test</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">acceptance_test.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">acceptance_test</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">acceptance_test.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">acceptance_test</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">acceptance_test.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">acceptance_test</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
@@ -126,7 +126,7 @@
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Debug/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/debug/bin -OutVariable out
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Debug/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/debug/bin -OutVariable out
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -135,7 +135,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Debug/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms/build -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Debug/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
+D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Debug/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/compiledb4ms/Debug/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -145,16 +145,16 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\debug\lib\manual-link\gtest_main.lib;Debug\libutils.lib;vcpkg_installed\x64-windows\debug\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\vcpkg_installed\x64-windows\debug\lib\manual-link\gtest_main.lib;..\libutils\Debug\libutils.lib;..\vcpkg_installed\x64-windows\debug\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
-      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Debug/acceptance_test.lib</ImportLibrary>
+      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Debug/acceptance_test.lib</ImportLibrary>
       <LinkErrorReporting></LinkErrorReporting>
-      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Debug/acceptance_test.pdb</ProgramDataBaseFile>
+      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Debug/acceptance_test.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -204,7 +204,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Release/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/bin -OutVariable out
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Release/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/bin -OutVariable out
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -213,7 +213,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Release/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms/build -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Release/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
+D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Release/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/compiledb4ms/Release/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -223,16 +223,16 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\lib\manual-link\gtest_main.lib;Release\libutils.lib;vcpkg_installed\x64-windows\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\vcpkg_installed\x64-windows\lib\manual-link\gtest_main.lib;..\libutils\Release\libutils.lib;..\vcpkg_installed\x64-windows\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
-      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Release/acceptance_test.lib</ImportLibrary>
+      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Release/acceptance_test.lib</ImportLibrary>
       <LinkErrorReporting></LinkErrorReporting>
-      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/Release/acceptance_test.pdb</ProgramDataBaseFile>
+      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/Release/acceptance_test.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -282,7 +282,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/MinSizeRel/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/bin -OutVariable out
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/MinSizeRel/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/bin -OutVariable out
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -291,7 +291,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/MinSizeRel/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms/build -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/MinSizeRel/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
+D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/MinSizeRel/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/compiledb4ms/MinSizeRel/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -301,16 +301,16 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\lib\manual-link\gtest_main.lib;MinSizeRel\libutils.lib;vcpkg_installed\x64-windows\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\vcpkg_installed\x64-windows\lib\manual-link\gtest_main.lib;..\libutils\MinSizeRel\libutils.lib;..\vcpkg_installed\x64-windows\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
-      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/MinSizeRel/acceptance_test.lib</ImportLibrary>
+      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/MinSizeRel/acceptance_test.lib</ImportLibrary>
       <LinkErrorReporting></LinkErrorReporting>
-      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/MinSizeRel/acceptance_test.pdb</ProgramDataBaseFile>
+      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/MinSizeRel/acceptance_test.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -359,7 +359,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/RelWithDebInfo/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/bin -OutVariable out
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/!dev/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/RelWithDebInfo/acceptance_test.exe -installedDir D:/!dev/WIP/tools/toolchain/compiledb4ms/build/vcpkg_installed/x64-windows/bin -OutVariable out
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -368,7 +368,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/RelWithDebInfo/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms/build -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/RelWithDebInfo/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
+D:\!dev\tools\cmake\bin\cmake.exe -D TEST_TARGET=acceptance_test -D TEST_EXECUTABLE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/RelWithDebInfo/acceptance_test.exe -D TEST_EXECUTOR= -D TEST_WORKING_DIR=D:/!dev/WIP/tools/toolchain/compiledb4ms -D TEST_EXTRA_ARGS= -D "TEST_PROPERTIES=ENVIRONMENT";"compiledb4ms=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/compiledb4ms/RelWithDebInfo/compiledb4ms.exe" -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=acceptance_test_TESTS -D CTEST_FILE=D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/acceptance_test[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_DISCOVERY_EXTRA_ARGS= -D TEST_XML_OUTPUT_DIR= -P D:/!dev/tools/cmake/share/cmake-4.1/Modules/GoogleTestAddTests.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -378,16 +378,16 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>vcpkg_installed\x64-windows\lib\manual-link\gtest_main.lib;RelWithDebInfo\libutils.lib;vcpkg_installed\x64-windows\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\vcpkg_installed\x64-windows\lib\manual-link\gtest_main.lib;..\libutils\RelWithDebInfo\libutils.lib;..\vcpkg_installed\x64-windows\lib\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
-      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/RelWithDebInfo/acceptance_test.lib</ImportLibrary>
+      <ImportLibrary>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/RelWithDebInfo/acceptance_test.lib</ImportLibrary>
       <LinkErrorReporting></LinkErrorReporting>
-      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/RelWithDebInfo/acceptance_test.pdb</ProgramDataBaseFile>
+      <ProgramDataBaseFile>D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/RelWithDebInfo/acceptance_test.pdb</ProgramDataBaseFile>
       <RandomizedBaseAddress></RandomizedBaseAddress>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -396,11 +396,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\!dev\WIP\tools\toolchain\compiledb4ms\CMakeLists.txt">
+    <CustomBuild Include="D:\!dev\WIP\tools\toolchain\compiledb4ms\tests\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/tests/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/CMakeFiles/generate.stamp
+D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -408,12 +408,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCXXCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeRCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeSystem.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg-configuration.json;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg.json;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;D:\!dev\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/tests/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/CMakeFiles/generate.stamp
+D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -421,12 +421,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCXXCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeRCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeSystem.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg-configuration.json;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg.json;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;D:\!dev\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/tests/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/CMakeFiles/generate.stamp
+D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -434,12 +434,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCXXCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeRCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeSystem.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg-configuration.json;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg.json;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;D:\!dev\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/!dev/WIP/tools/toolchain/compiledb4ms/tests/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/CMakeFiles/generate.stamp
+D:\!dev\tools\cmake\bin\cmake.exe -SD:/!dev/WIP/tools/toolchain/compiledb4ms -BD:/!dev/WIP/tools/toolchain/compiledb4ms/build --check-stamp-file D:/!dev/WIP/tools/toolchain/compiledb4ms/build/tests/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -447,8 +447,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeCXXCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeRCCompiler.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\4.1.0-rc3\CMakeSystem.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg-configuration.json;D:\!dev\WIP\tools\toolchain\compiledb4ms\vcpkg.json;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeDependentOption.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Linker\MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-C.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\Windows.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;D:\!dev\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfig.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestConfigVersion.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-debug.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets-release.cmake;D:\!dev\WIP\tools\toolchain\compiledb4ms\build\vcpkg_installed\x64-windows\share\gtest\GTestTargets.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\CMakeFindDependencyMacro.cmake;D:\!dev\tools\cmake\share\cmake-4.1\Modules\GoogleTest.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\!dev\WIP\tools\toolchain\compiledb4ms\build\tests\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
@@ -463,11 +463,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\!dev\WIP\tools\toolchain\compiledb4ms\build\compiledb4ms.vcxproj">
+    <ProjectReference Include="D:\!dev\WIP\tools\toolchain\compiledb4ms\build\compiledb4ms\compiledb4ms.vcxproj">
       <Project>{93F1DE87-172A-3261-B169-65039254C93F}</Project>
       <Name>compiledb4ms</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\!dev\WIP\tools\toolchain\compiledb4ms\build\libutils.vcxproj">
+    <ProjectReference Include="D:\!dev\WIP\tools\toolchain\compiledb4ms\build\libutils\libutils.vcxproj">
       <Project>{C0DF0C19-74A9-331A-9BD1-EA7CCDD49B74}</Project>
       <Name>libutils</Name>
     </ProjectReference>

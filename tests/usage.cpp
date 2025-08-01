@@ -9,7 +9,8 @@
 TEST(Usage, generate_compiledb_for_vcxproj)
 {
 	std::string compiledb4ms = utils::get_env("compiledb4ms", "compiledb4ms");
-	int exit_code = system(compiledb4ms.c_str());
+	std::string cmd = compiledb4ms + " -p tests/usage.vcxproj";
+	int exit_code = system(cmd.c_str());
 	ASSERT_EQ(0, exit_code);
 
 	auto res = utils::read_file("compile_commands.json");
