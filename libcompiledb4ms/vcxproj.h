@@ -31,6 +31,10 @@ public:
 
 	std::string security_check();
 
+	std::string basic_runtime_checks();
+
+	std::string inline_function_expansion();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

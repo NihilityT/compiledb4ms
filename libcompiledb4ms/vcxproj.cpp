@@ -144,6 +144,36 @@ std::string Vcxproj::security_check()
 	return "/GS";
 }
 
+std::string Vcxproj::basic_runtime_checks()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string brc = item_definition_group.child("ClCompile")
+		.child("BasicRuntimeChecks").first_child().value();
+	if (brc == "StackFrameRuntimeCheck") {
+		return "/RTCs";
+	} else if (brc == "UninitializedLocalUsageCheck") {
+		return "/RTCu";
+	} else if (brc == "EnableFastChecks") {
+		return "/RTC1";
+	}
+	return "";
+}
+
+std::string Vcxproj::inline_function_expansion()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string ife = item_definition_group.child("ClCompile")
+		.child("InlineFunctionExpansion").first_child().value();
+	if (ife == "Disabled") {
+		return "/Ob0";
+	} else if (ife == "OnlyExplicitInline") {
+		return "/Ob1";
+	} else if (ife == "AnySuitable") {
+		return "/Ob2";
+	}
+	return "";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

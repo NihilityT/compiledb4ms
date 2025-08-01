@@ -84,3 +84,23 @@ TEST(Vcxproj, extract_security_check_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.security_check(), expected);
 }
+
+TEST(Vcxproj, extract_basic_runtime_checks_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/RTC1)"
+	};
+	ASSERT_EQ(proj.basic_runtime_checks(), expected);
+}
+
+TEST(Vcxproj, extract_inline_function_expansion_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/Ob0)"
+	};
+	ASSERT_EQ(proj.inline_function_expansion(), expected);
+}
