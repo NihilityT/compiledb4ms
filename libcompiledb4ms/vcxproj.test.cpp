@@ -44,3 +44,13 @@ TEST(Vcxproj, extract_std_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.std(), expected);
 }
+
+TEST(Vcxproj, extract_runtime_library_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/MDd)"
+	};
+	ASSERT_EQ(proj.runtime_library(), expected);
+}

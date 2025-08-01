@@ -86,6 +86,23 @@ std::string Vcxproj::std()
 	return language_standard;
 }
 
+std::string Vcxproj::runtime_library()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string library = item_definition_group.child("ClCompile")
+		.child("RuntimeLibrary").first_child().value();
+	if (library == "MultiThreaded") {
+		return "/MT";
+	} else if (library == "MultiThreadedDebug") {
+		return "/MTd";
+	} else if (library == "MultiThreadedDLL") {
+		return "/MD";
+	} else if (library == "MultiThreadedDebugDLL") {
+		return "/MDd";
+	}
+	return "";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";
