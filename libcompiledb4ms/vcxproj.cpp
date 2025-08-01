@@ -385,6 +385,15 @@ std::string Vcxproj::program_database_file_name()
 		: resolve_property(pdbfn)) + '"';
 }
 
+std::string Vcxproj::object_file_name()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string ofn = item_definition_group.child("ClCompile")
+		.child("ObjectFileName").first_child().value();
+
+	return "/Fo\"" + resolve_property(ofn) + R"(\")";
+}
+
 std::string Vcxproj::get_property(const std::string& property)
 {
 	if (property == "PlatformToolsetVersion") {

@@ -31,7 +31,7 @@ int main()
 			+ proj.security_check() + " "
 			+ proj.floating_point_model() + " "
 			+ proj.std() + " "
-			R"(/Fo"acceptance_test.dir\Debug\\" )"
+			+ proj.object_file_name() + " "
 			+ proj.program_database_file_name() + " "
 			+ proj.external_header_warning_level() + " "
 			+ proj.calling_convension() + " "

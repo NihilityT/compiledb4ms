@@ -59,6 +59,8 @@ public:
 
 	std::string program_database_file_name();
 
+	std::string object_file_name();
+
 	std::string get_property(const std::string& property);
 	std::string resolve_property(const std::string& expression);
 

@@ -224,6 +224,16 @@ TEST(Vcxproj, extract_program_database_file_name_from_vcxproj_file)
 	ASSERT_EQ(proj.program_database_file_name(), expected);
 }
 
+TEST(Vcxproj, extract_object_file_name_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/Fo"acceptance_test.dir\Debug\\")"
+	};
+	ASSERT_EQ(proj.object_file_name(), expected);
+}
+
 TEST(Vcxproj, get_property)
 {
 	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
