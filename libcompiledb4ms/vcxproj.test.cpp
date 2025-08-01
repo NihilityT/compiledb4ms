@@ -5,6 +5,15 @@
 
 using namespace compiledb4ms;
 
+TEST(Vcxproj, get_directory_of_vcxproj)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::filesystem::path expected = std::filesystem::current_path()
+		/ "libcompiledb4ms";
+	ASSERT_EQ(proj.directory(), expected);
+}
+
 TEST(Vcxproj, extract_cl_compile_file_from_vcxproj_file)
 {
 	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };

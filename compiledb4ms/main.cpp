@@ -13,7 +13,7 @@ int main()
 	out << "[\n";
 	for (auto& cl_compile_file : proj.cl_compile_files()) {
 		Command_object obj = {
-			"D:/!dev/WIP/tools/toolchain/compiledb4ms/build",
+			proj.directory(),
 			cl_compile_file,
 			R"("D:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64\CL.exe" )"
 			R"(/c /Zi /nologo /W4 /WX /diagnostics:column )"

@@ -15,6 +15,8 @@ class Vcxproj
 public:
 	Vcxproj(const std::filesystem::path& path);
 
+	std::filesystem::path directory();
+
 	std::string preprocessor_definitions();
 
 	std::string additional_options();
@@ -41,6 +43,7 @@ private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 
 private:
+	std::filesystem::path m_proj_path;
 	pugi::xml_document m_doc;
 	pugi::xml_node m_project;
 };

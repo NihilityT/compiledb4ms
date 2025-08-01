@@ -7,9 +7,15 @@
 namespace compiledb4ms {
 
 Vcxproj::Vcxproj(const std::filesystem::path& path)
+	: m_proj_path(path)
 {
 	m_doc.load_file(path.c_str());
 	m_project = m_doc.child("Project");
+}
+
+std::filesystem::path Vcxproj::directory()
+{
+	return std::filesystem::absolute(m_proj_path).parent_path();
 }
 
 std::string Vcxproj::preprocessor_definitions()
