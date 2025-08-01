@@ -103,6 +103,21 @@ std::string Vcxproj::runtime_library()
 	return "";
 }
 
+std::string Vcxproj::floating_point_model()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string model = item_definition_group.child("ClCompile")
+		.child("FloatingPointModel").first_child().value();
+	if (model == "Precise") {
+		return "/fp:precise";
+	} else if (model == "Strict") {
+		return "/fp:strict";
+	} else if (model == "Fast") {
+		return "/fp:fast";
+	}
+	return "/fp:precise";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

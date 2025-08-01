@@ -54,3 +54,13 @@ TEST(Vcxproj, extract_runtime_library_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.runtime_library(), expected);
 }
+
+TEST(Vcxproj, extract_floating_point_model_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/fp:precise)"
+	};
+	ASSERT_EQ(proj.floating_point_model(), expected);
+}
