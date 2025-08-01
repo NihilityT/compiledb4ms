@@ -133,6 +133,17 @@ std::string Vcxproj::exception_handling()
 	return "";
 }
 
+std::string Vcxproj::security_check()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string bsc = item_definition_group.child("ClCompile")
+		.child("BufferSecurityCheck").first_child().value();
+	if (bsc == "false") {
+		return "/GS-";
+	}
+	return "/GS";
+}
+
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)
 {
 	auto arch_condition = std::string{ "'$(Configuration)|$(Platform)'=='" } + arch + "'";

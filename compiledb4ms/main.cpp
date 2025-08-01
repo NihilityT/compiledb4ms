@@ -21,7 +21,7 @@ int main()
 			+ proj.exception_handling() + " "
 			R"(/RTC1 )"
 			+ proj.runtime_library() + " "
-			R"(/GS )"
+			+ proj.security_check() + " "
 			+ proj.floating_point_model() + " "
 			+ proj.std() + " "
 			R"(/Fo"acceptance_test.dir\Debug\\" )"

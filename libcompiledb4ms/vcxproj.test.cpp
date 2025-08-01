@@ -74,3 +74,13 @@ TEST(Vcxproj, extract_exception_handling_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.exception_handling(), expected);
 }
+
+TEST(Vcxproj, extract_security_check_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/GS)"
+	};
+	ASSERT_EQ(proj.security_check(), expected);
+}

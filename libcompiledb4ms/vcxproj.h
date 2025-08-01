@@ -29,6 +29,8 @@ public:
 
 	std::string exception_handling();
 
+	std::string security_check();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 
