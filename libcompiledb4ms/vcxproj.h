@@ -55,6 +55,8 @@ public:
 
 	std::string calling_convension();
 
+	std::string external_header_warning_level();
+
 private:
 	pugi::xml_node get_arch(const char* name, const char* arch = "Debug|x64");
 

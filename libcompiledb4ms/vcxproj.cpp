@@ -4,6 +4,28 @@
 #include <algorithm>
 #include <sstream>
 
+namespace {
+
+std::string warning_level(std::string_view warning)
+{
+	if (warning == "TurnOffAllWarnings") {
+		return "W0";
+	} else if (warning == "Level1") {
+		return "W1";
+	} else if (warning == "Level2") {
+		return "W2";
+	} else if (warning == "Level3") {
+		return "W3";
+	} else if (warning == "Level4") {
+		return "W4";
+	} else if (warning == "EnableAllWarnings") {
+		return "Wall";
+	}
+	return "W1";
+}
+
+}
+
 namespace compiledb4ms {
 
 Vcxproj::Vcxproj(const std::filesystem::path& path)
@@ -229,20 +251,7 @@ std::string Vcxproj::warning_level()
 	std::string wl = item_definition_group.child("ClCompile")
 		.child("WarningLevel").first_child().value();
 
-	if (wl == "TurnOffAllWarnings") {
-		return "/W0";
-	} else if (wl == "Level1") {
-		return "/W1";
-	} else if (wl == "Level2") {
-		return "/W2";
-	} else if (wl == "Level3") {
-		return "/W3";
-	} else if (wl == "Level4") {
-		return "/W4";
-	} else if (wl == "EnableAllWarnings") {
-		return "/Wall";
-	}
-	return "/W1";
+	return "/" + ::warning_level(wl);
 }
 
 std::string Vcxproj::suppress_startup_banner()
@@ -335,6 +344,22 @@ std::string Vcxproj::calling_convension()
 		return "/Gv";
 	}
 	return "/Gd";
+}
+
+std::string Vcxproj::external_header_warning_level()
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string ewl = item_definition_group.child("ClCompile")
+		.child("ExternalWarningLevel").first_child().value();
+
+	if (ewl == "InheritWarningLevel") {
+		std::string res = warning_level();
+		if (res == "/Wall") {
+			return "/external:W4";
+		}
+		return "/external:" + res.substr(1);
+	}
+	return "/external:" + ::warning_level(ewl);
 }
 
 pugi::xml_node Vcxproj::get_arch(const char* name, const char* arch /*= "Debug|x64"*/)

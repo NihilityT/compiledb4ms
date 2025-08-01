@@ -203,3 +203,13 @@ TEST(Vcxproj, extract_calling_convension_from_vcxproj_file)
 	};
 	ASSERT_EQ(proj.calling_convension(), expected);
 }
+
+TEST(Vcxproj, extract_external_header_warning_level_from_vcxproj_file)
+{
+	Vcxproj proj{ "libcompiledb4ms/vcxproj.test.vcxproj" };
+
+	std::string expected{
+		R"(/external:W0)"
+	};
+	ASSERT_EQ(proj.external_header_warning_level(), expected);
+}
