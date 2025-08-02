@@ -1,5 +1,8 @@
 #include <libcompiledb4ms/sln.h>
+#include <libcompiledb4ms/vcxproj.h>
 #include <libutils/utils.h>
+
+#include <iterator>
 #include <regex>
 #include <sstream>
 #include <string>
@@ -28,6 +31,18 @@ std::unordered_map<std::string, std::filesystem::path> Sln::projects() const
 		}
 	}
 
+	return res;
+}
+
+std::vector<Command_object> Sln::command_objects() const
+{
+	std::vector<Command_object> res;
+	for (auto& it : projects()) {
+		auto objs = Vcxproj{ it.second }.command_objects();
+		res.insert(res.cend(),
+			   std::make_move_iterator(objs.cbegin()),
+			   std::make_move_iterator(objs.cend()));
+	}
 	return res;
 }
 
