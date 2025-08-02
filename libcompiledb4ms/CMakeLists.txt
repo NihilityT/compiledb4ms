@@ -7,6 +7,8 @@ add_library(libcompiledb4ms STATIC
   utils.h
   vcxproj.cpp
   vcxproj.h
+  sln.cpp
+  sln.h
 )
 target_include_directories(libcompiledb4ms
   PUBLIC ${CMAKE_SOURCE_DIR}
@@ -24,6 +26,7 @@ add_executable(libcompiledb4ms_test
   command_object.test.cpp
   utils.test.cpp
   vcxproj.test.cpp
+  sln.test.cpp
 )
 target_link_libraries(libcompiledb4ms_test
   PRIVATE GTest::gtest_main
