@@ -65,6 +65,8 @@ public:
 
 	std::string object_file_name() const;
 
+	std::string additional_include_directories() const;
+
 	std::string get_property(const std::string& property) const;
 	std::string resolve_property(const std::string& expression) const;
 

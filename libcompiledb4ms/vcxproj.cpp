@@ -60,6 +60,7 @@ std::vector<Command_object> Vcxproj::command_objects() const
 			 directory(),
 			 cl_compile_file,
 			 '"' + utils::get_cl_path().string() + "\" /c "
+			 + additional_include_directories() + " "
 			 + debug_information_format() + " "
 			 + suppress_startup_banner() + " "
 			 + warning_level() + " "
@@ -432,6 +433,29 @@ std::string Vcxproj::object_file_name() const
 		.child("ObjectFileName").first_child().value();
 
 	return "/Fo\"" + resolve_property(ofn) + R"(\")";
+}
+
+std::string Vcxproj::additional_include_directories() const
+{
+	auto item_definition_group = get_arch("ItemDefinitionGroup");
+	std::string aid = item_definition_group.child("ClCompile")
+		.child("AdditionalIncludeDirectories").first_child().value();
+
+	auto splited = ::utils::split(aid, ';');
+	auto it = std::find(splited.cbegin(), splited.cend(), "%(AdditionalIncludeDirectories)");
+	if (it != splited.cend()) {
+		splited.erase(it);
+	}
+
+	std::ostringstream os;
+	for (auto& sub : splited) {
+		if (os.tellp()) {
+			os << ' ';
+		}
+		os << "/I\"" << sub << '"';
+	}
+
+	return os.str();
 }
 
 std::string Vcxproj::get_property(const std::string& property) const
