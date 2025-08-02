@@ -1,5 +1,6 @@
 ﻿#include <libcompiledb4ms/command_object.h>
 #include <libcompiledb4ms/utils.h>
+#include <libcompiledb4ms/sln.h>
 #include <libcompiledb4ms/vcxproj.h>
 
 #include <fstream>
@@ -28,6 +29,16 @@ int main(int argc, char* argv[])
 				? Vcxproj{ argv[i + 1] }
 				: Vcxproj{ argv[i + 1], arch_type };
 			for (auto& obj : proj.command_objects()) {
+				if (out_count++) {
+					out << ",\n";
+				}
+				out << obj;
+			}
+		} else if (argv[i] == "-s"sv) {
+			Sln sln = arch_type.empty()
+				? Sln{ argv[i + 1] }
+				: Sln{ argv[i + 1], arch_type };
+			for (auto& obj : sln.command_objects()) {
 				if (out_count++) {
 					out << ",\n";
 				}

@@ -38,7 +38,8 @@ std::vector<Command_object> Sln::command_objects() const
 {
 	std::vector<Command_object> res;
 	for (auto& it : projects()) {
-		auto objs = Vcxproj{ it.second }.command_objects();
+		Vcxproj proj{ it.second, m_arch };
+		auto objs = proj.command_objects();
 		res.insert(res.cend(),
 			   std::make_move_iterator(objs.cbegin()),
 			   std::make_move_iterator(objs.cend()));
