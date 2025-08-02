@@ -16,10 +16,20 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	std::string_view arch_type;
-	int out_count = 0;
-
 	std::ofstream out{ "compile_commands.json" };
+
+	int out_count = 0;
+	auto out_objects = [&](auto&& command_objects) {
+		for (auto& obj : command_objects) {
+			if (out_count++) {
+				out << ",\n";
+			}
+			out << obj;
+		}
+	};
+
+	std::string_view arch_type;
+
 	out << "[\n";
 	for (int i = 1; i < argc; i += 2) {
 		if (argv[i] == "-t"sv) {
@@ -28,22 +38,12 @@ int main(int argc, char* argv[])
 			Vcxproj proj = arch_type.empty()
 				? Vcxproj{ argv[i + 1] }
 				: Vcxproj{ argv[i + 1], arch_type };
-			for (auto& obj : proj.command_objects()) {
-				if (out_count++) {
-					out << ",\n";
-				}
-				out << obj;
-			}
+			out_objects(proj.command_objects());
 		} else if (argv[i] == "-s"sv) {
 			Sln sln = arch_type.empty()
 				? Sln{ argv[i + 1] }
 				: Sln{ argv[i + 1], arch_type };
-			for (auto& obj : sln.command_objects()) {
-				if (out_count++) {
-					out << ",\n";
-				}
-				out << obj;
-			}
+			out_objects(sln.command_objects());
 		}
 	}
 	out << "\n]";
