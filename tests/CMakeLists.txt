@@ -6,7 +6,7 @@ add_executable(acceptance_test
 )
 target_link_libraries(acceptance_test
   PRIVATE GTest::gtest_main
-  PRIVATE libutils
+  PRIVATE libutils libcompiledb4ms
 )
 gtest_discover_tests(acceptance_test
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
