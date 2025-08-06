@@ -7,3 +7,5 @@ target_include_directories(compiledb4ms
 target_link_libraries(compiledb4ms
   PRIVATE libcompiledb4ms
 )
+
+install(TARGETS compiledb4ms)

@@ -18,3 +18,7 @@ add_subdirectory(libcompiledb4ms)
 add_subdirectory(compiledb4ms)
 
 add_subdirectory(tests)
+
+
+set(CPACK_PACKAGE_NAME "compiledb4ms")
+include(CPack)
