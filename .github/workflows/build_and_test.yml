@@ -57,8 +57,14 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}} --test-dir .\build\ --output-on-failure
 
     - name: Pack
-      if: ${{ env.NEED_RELEASE }}
-      run: cpack -G ZIP --config .\build\CPackConfig.cmake -D CPACK_PACKAGE_FILE_NAME=compiledb4ms-${{matrix.build_arch}} -D CPACK_INCLUDE_TOPLEVEL_DIRECTORY=OFF
+      run: |
+        cpack -G ZIP --config .\build\CPackConfig.cmake -D CPACK_PACKAGE_FILE_NAME=compiledb4ms-${{matrix.build_arch}} -D CPACK_INCLUDE_TOPLEVEL_DIRECTORY=OFF
+        cmake --install .\build\ --prefix ./install
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: compiledb4ms-${{matrix.build_arch}}
+        path: ./install
 
     - name: Release
       if: ${{ env.NEED_RELEASE }}
