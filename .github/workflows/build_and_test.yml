@@ -1,0 +1,50 @@
+name: Build and Test CI
+
+on: [push, pull_request]
+permissions:
+  contents: write
+
+env:
+  BUILD_TYPE: Release
+  NEED_RELEASE: ${{ startsWith(github.event.ref, 'refs/tags/v') || '' }}
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        include:
+          - build_arch: x64
+            cmake_arch: x64
+
+          - build_arch: x86
+            cmake_arch: Win32
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B ./build -A ${{matrix.cmake_arch}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET=${{matrix.build_arch}}-windows-static-md -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake"
+
+    - name: Build
+      run: cmake --build ./build --config ${{env.BUILD_TYPE}} -j
+
+    - name: Init Env for Test
+      uses: TheMrMilchmann/setup-msvc-dev@v3
+      with:
+        arch: x64
+
+    - name: Test
+      run: ctest -C ${{env.BUILD_TYPE}} --test-dir .\build\ --output-on-failure
+
+    - name: Pack
+      if: ${{ env.NEED_RELEASE }}
+      run: cpack -G ZIP --config .\build\CPackConfig.cmake -D CPACK_PACKAGE_FILE_NAME=compiledb4ms-${{matrix.build_arch}} -D CPACK_INCLUDE_TOPLEVEL_DIRECTORY=OFF
+
+    - name: Release
+      if: ${{ env.NEED_RELEASE }}
+      uses: softprops/action-gh-release@v2
+      with:
+        prerelease: true
+        files: compiledb4ms-${{matrix.build_arch}}.zip
